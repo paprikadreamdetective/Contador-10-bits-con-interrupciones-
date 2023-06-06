@@ -6,3 +6,28 @@ EL proyecto consiste en un contador ascendente-descendente de 10 bits que posee 
 ## A continuacion se presenta una diagrama de flujo con el funcionamiento del programa:
 
 ![Diagrama sin título-Página-3 drawio (4)](https://github.com/paprikadreamdetective/Contador-10-bits-con-interrupciones-/assets/133156970/d2a0c5b1-4667-4c78-9cee-c0a8331960cc)
+
+## 2. Compilacion.
+Para la compilacion del proyecto es necesario tener instalado el compilador cruzado de arm, la utilidad para grabar el programa en el grabador a usar y la utilidad make. El comando de instalacion es el siguiente: 
+```asm
+sudo apt install stlink-tools gcc-arm-none-eabi make
+
+```
+Este comando funciona siempre y cuando se este trabajando bajo una distribucion de linux basada en ubuntu.
+Una vez se haya instalado correctamente los paquetes correspondientes queda realizar la compilacion de nuestro programa, para esto es importante tener los archivos .inc en el mismo directorio en el que se encuentran los archivos fuente del programa. Los archivos .inc contienen las compensaciones y la direccion base para poder configurar los registros GPIO. La compilacion se hace mediante los siguientes comandos:
+```asm
+$ make clean
+$ make 
+$ make write
+```
+make clean: Sirve para eliminar los codigo objeto .o.
+make: Crea los codigos objeto con base en los archivos fuente .s.
+make write: Sirve para grabar los archivos .bin en la tarjeta.
+
+Tambien hay que tener en cuenta que si el codigo fuente fue escrito en diferentes archivos, entonces los archivos con terminacion .s tendran que ser añadidos a la linea 10 del makefile ya que si no se agregan el compilador no tomara en cuenta dichos archivos.
+
+Otro punto a destacar es que si se escribieron las interrupciones en archivos fuente es importante tambien incluirlos, como se muestra en el siguiente comando: 
+
+```asm
+# List of source files
+SRCS = cnt10.s ivt.s default_handler.s reset_handler.s delay.s exti_isr.s systick_isr.s speed.s # En esta parte van los archivos fuente a compilar
