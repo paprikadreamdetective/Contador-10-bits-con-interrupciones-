@@ -31,3 +31,12 @@ Otro punto a destacar es que si se escribieron las interrupciones en archivos fu
 ```asm
 # List of source files
 SRCS = cnt10.s ivt.s default_handler.s reset_handler.s delay.s exti_isr.s systick_isr.s speed.s # En esta parte van los archivos fuente a compilar
+```
+## 3. Diagrama del hardware.
+Para las salidas de los leds, se usaron los pines A0-A9, para las entradas de los pines B0 y B4 correspondientes a las interrupciones configuradas anteriormente.
+
+![esquematicop4](https://github.com/paprikadreamdetective/Contador-10-bits-con-interrupciones-/assets/133156970/0b5359ef-4d1a-4fbe-b21a-3959a0da7f5a)
+
+
+
+
